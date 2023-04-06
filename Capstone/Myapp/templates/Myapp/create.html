@@ -1,0 +1,43 @@
+{% extends "Myapp/layout.html" %}
+
+{% block body %}
+<link href="static/Myapp/create.css" rel="stylesheet">
+<h2>Create Recipe</h2>
+
+<form action="{% url 'create' %}" method="POST">
+    {% csrf_token %}
+    <div class="data-card">
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input type="text" name="title" class="form-control" id="title" placeholder="Enter title">
+          <small id="psst" class="form-text text-muted">Title</small>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" name="description" class="form-control" id="description" style="height: 200px;" placeholder="Enter Description">
+          </div>
+          <div class="form-group">
+            <label for="directions">Directions:</label>
+            <input type="text" name="directions" class="form-control" id="directions" style="height: 200px;" placeholder="Enter Directions">
+          </div> 
+          <div class="form-group">
+            <label for="ingredients">Ingredients:</label>
+            <input type="text" name="ingredients" class="form-control" id="ingredients" style="height: 200px;" placeholder="Enter Ingredients">
+            <small id="psst" class="form-text text-muted">Ingredients</small>
+          </div>             
+          <div class="form-group">
+            <label for="imageurl">Image Url:</label>
+            <input type="text" name="imageurl" class="form-control" id="imageurl" placeholder="Enter Image Url">
+          </div>            
+          <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" name="price" class="form-control" id="price" placeholder="Enter Price">
+          </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me</label>
+        </div>
+        <button type="submit" class="btn btn-success" id="button">Create</button>
+    </div>
+</form>
+{% endblock %}

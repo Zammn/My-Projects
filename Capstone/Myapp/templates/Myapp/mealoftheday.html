@@ -1,0 +1,10 @@
+{% extends 'Myapp/layout.html' %}
+
+{% block body %}
+<link href="static/Myapp/meal.css" rel="stylesheet">
+<div class="container">
+    <p>Your random meal for today is:</p>
+    <h1>{{ random_items }}</h1>
+    <h2>Randomize it again?<a href="{% url 'get_random' %}"> Random meal!</a></h2>
+</div>
+{% endblock %}
