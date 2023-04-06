@@ -1,0 +1,48 @@
+{% extends "network/layout.html" %}
+<!-- add css later-->
+{% block body %}
+    <h1>{{ profileUser }}</h1>
+
+    <div class="profileinfo">
+        <div class="followers">Followers: {{ followers.count }}</div>
+        <div class="following">Following: {{ following.count }} </div>
+        {% if user.is_authenticated %}
+            {% if user != correct_profile %}
+                {% if isFollowing %}
+                    <form action="{% url 'unfollow' %}" method="POST">
+                       {% csrf_token %}
+                       <input type="hidden" name="userfollow" value="{{ correct_profile }}"/>
+                       <input type="submit" value="unfollow" class="btn btn-primary"/>   
+                    </form>
+                {% else %}
+                    <form action="{% url 'follow' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="userfollow" value="{{ correct_profile }}"/>
+                        <input type="submit" value="follow" class="btn btn-primary"/>
+                    </form>               
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="all-posts">
+        <div class="every-post1">
+        {% for post in page_posts %}   
+        <hr>
+        <h5>{{ post.posts }}</h5>
+        <p class="username"><a href="{% url 'profile' user_id=post.owner.id %}">By: {{ post.owner }}</a></p> 
+        <p class="date">{{ post.date }}</p>
+        {% endfor %}
+        </div>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination d-flex justify-content-center">
+            {% if page_posts.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_posts.previous_page_number }}">Previous</a></li>
+            {% endif %}
+            {% if page_posts.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_posts.next_page_number }}">Next</a></li>
+            {% endif %}
+            </ul>
+        </ul>
+    </nav>
+{% endblock %}

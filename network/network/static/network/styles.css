@@ -1,0 +1,79 @@
+h1, h2, .textbox {
+    display: flex;
+    justify-content: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+#button1 {
+    margin-left: 20px;
+    height: fit-content;
+}
+.all-posts {
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    border: 2px solid whitesmoke;
+    outline: bisque solid 10px;
+    margin: auto;  
+    padding: 20px;
+    border-radius: 20px;
+}
+.container {
+    margin-bottom: 40px;
+} 
+.edit-section {
+    margin: 20px 20px 20px;
+}
+.every-post, .every-post1 {
+    margin: 50px;
+    padding: 20px 20px 20px;
+    border: 2px solid transparent;
+    outline: solid beige 7px;
+    outline-offset: 10px;
+    border-radius: 35px;
+}
+.every-post1 {
+    margin-top: 0px;
+}
+hr {
+    border: 1px solid black;
+}
+h5 {
+    font-size: 85px;
+    padding: 25px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.username, .date {
+    font-size: 20px;
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif;
+    padding: 0px;
+}
+.profileinfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 20px 20px;
+}
+.followers, .following {
+    padding: 10px;
+    padding-right: 15px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 25px;
+}
+/* This hides the popup form by default */
+.hidden {
+    display: none;
+}
+  
+  /* This shows the popup form when it's open */
+.edit-post-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+

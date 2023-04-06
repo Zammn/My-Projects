@@ -1,0 +1,110 @@
+{% extends "network/layout.html" %}
+<!-- add css later-->
+{% block body %}
+
+<script>
+    function likeHandler(id, userLiked){
+        const btn = document.getElementById(`${id}`);
+
+        btn.classList.remove('fa-thumbs-up')
+        btn.classList.remove('fa-thumbs-down')
+
+        if(userLiked.indexOf(id) >= 0){
+            var liked = true;
+        } else {
+            var liked = false;
+        }
+
+        if(liked === true){
+            fetch(`/unliked/${id}`)
+            .then(response => response.json)
+            .then(result => {
+                btn.classList.add('fa-thumbs-up')
+            })
+        } else{
+            fetch(`/liked/${id}`)
+            .then(response => response.json)
+            .then(result => {
+                btn.classList.add('fa-thumbs-down')
+            })
+        }
+        liked = !liked
+    }
+    function openEditArea(postId) {
+        var editArea = document.getElementById('edit-area-' + postId);
+        editArea.style.display = 'block';
+      }
+      
+      function savePost(postId) {
+        var content = document.getElementById('edit-content-' + postId).value;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/update/' + postId);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+            var post = JSON.parse(xhr.responseText);
+            var contentNode = document.querySelector('#post-' + postId + ' p');
+            contentNode.innerHTML = post.content;
+            var editArea = document.getElementById('edit-area-' + postId);
+            editArea.style.display = 'none';
+          } else {
+            alert('Unable to save post');
+          }
+        };
+        xhr.send('post=' + encodeURIComponent(post));
+      }
+      
+</script>
+    <h1>Feed</h1>
+    {% if user.is_authenticated %}
+    <div class="container">  
+        <h2>What's new? Share with the world!</h2>
+        <form class="textbox" action="{% url 'addPost' %}" method="post">
+            {% csrf_token %}
+            <textarea name="posts" rows="4" cols="50"></textarea>
+            <br/>
+            <br/>
+            <input id="button1" type="submit" value="Post" class="btn btn-primary"/>
+        </form>
+    </div>
+    {% endif %}
+    <div class="all-posts" id="posts">
+        {% for post in page_posts %} 
+            <div class="every-post">  
+                <h5>{{ post.posts }}</h5>
+                    <p class="username"><a href="{% url 'profile' user_id=post.owner.id %}">By: {{ post.owner }}</a></p> 
+                    <p class="date">On: {{ post.date }}</p>
+                    <div class="edit-section">
+                        {% if user.is_authenticated %}
+                            {% if user == post.owner %}
+                            <div>
+                                <button class="btn btn-danger" onclick="openEditArea({{ post.id }})">Edit</button>
+                                <div id="edit-area-{{ post.id }}" style="display:none;">
+                                  <textarea id="edit-content-{{ post.id }}">{{ post.posts }}</textarea>
+                                  <button onclick="savePost({{ post.id }})">Save</button>
+                                </div>
+                              </div>
+                              
+                            {% endif %}
+                        {% endif %} 
+                    </div>
+                {% if post.id in userLiked %}
+                    <button class="btn btn-info fa fa-thumbs-down col-3" onclick="likeHandler({{ post.id }}, {{ userLiked }})" id="{{ post.id }}"></button>
+                {% else %}
+                    <button class="btn btn-info fa fa-thumbs-up col-3" onclick="likeHandler({{ post.id }}, {{ userLiked }})" id="{{ post.id }}"></button>
+                {% endif %}    
+                </div>
+    {% endfor %}
+        </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination d-flex justify-content-center">
+            {% if page_posts.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_posts.previous_page_number }}">Previous</a></li>
+            {% endif %}
+            {% if page_posts.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_posts.next_page_number }}">Next</a></li>
+            {% endif %}
+            </ul>
+        </ul>
+    </nav>
+{% endblock %}
