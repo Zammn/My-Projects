@@ -1,0 +1,25 @@
+{% extends "Myapp/layout.html" %}
+
+{% block body %}
+<div class="wrapper">
+    <div class="input">
+        <input type="text" placeholder="Add task">
+        <span class="material-symbols-outlined">
+            add_task
+            </span>
+    </div>
+</div>
+    <div class="details">
+        <div class="filter">
+        <span id="all" class="active">
+            Tasks for today!
+        </span>
+        </div>
+        <br>
+    </div>
+    <div class="buttons">
+        <button class="clear-button" id="clear-button">Delete All Tasks</button>    </div>
+    <div class="container">
+        <ul class="task-box"></ul>
+    </div>
+{% endblock %}

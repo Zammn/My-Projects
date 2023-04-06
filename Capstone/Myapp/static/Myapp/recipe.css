@@ -1,0 +1,57 @@
+body {
+    display: grid;
+    background-image: url(recipebackground.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: left 3s infinite alternate linear;
+}
+h1 {
+    color: turquoise;
+    text-align: center;
+    font-size: 50px;
+    font-family: cursive;
+    padding-top: 40px;
+}
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px 20px 20px;
+    margin: 40px;
+    margin-left: 90px;
+}
+.card {
+    padding: 20px 20px 20px;
+    margin: 50px;
+    border-radius: 12px;
+    text-align: center;
+    height: auto;
+    background-color: beige;
+}
+.details {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+.card-body:hover .details {
+    opacity: 1;
+}
+#text {
+    color: black;
+    padding-top: 30px;
+}
+p {
+    color: white;
+    text-align: center;
+    font-size: 20px;
+} 
+a {
+    color: lightblue;
+}
+a:hover {
+    color: beige;
+    text-decoration: none;
+}
+@keyframes left{
+    100%{
+        background-position: 50% 100%;
+    }
+}

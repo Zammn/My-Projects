@@ -1,0 +1,29 @@
+body {
+    background-color: whitesmoke;
+    display: grid;
+    background-image: url("background.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.data-card {
+    margin: 140px;
+    padding: 20px 10px 10px;
+    background-color: aliceblue;
+    border-radius: 15px;
+
+}
+.form-control {
+    border-radius: 2.25rem;
+    width: 1000px;
+    margin-left: 100px;
+    height: 60px;
+    text-align: center;
+}
+.form-group {
+    text-align: center;
+}
+#button {
+    position: relative;
+    left: 550px;
+}
