@@ -1,0 +1,26 @@
+<%- include("partials/header.ejs") %>
+<div class="container">
+  <form action="/add" method="POST">
+    <input type="text" name="newItem" placeholder="Enter a new task" autofocus>
+    <button class="btn btn-success" name="button" value="<%= listTitle %>" type="submit">Add</button>
+  </form>
+  <h1>Welcome to <br>ToDo!</h1>
+</div>
+<h3><%= new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) %>
+</h3>
+<hr>
+<h2><%= listTitle %>'s Task List:</h2>
+<div class="container2">
+  <ul>
+    <% foundItems.forEach((foundItem) => { %>
+      <li>
+        <%= foundItem.name %>
+        <form action="/delete" method="POST" style="display: inline;">
+          <button class="btn btn-danger" name="id" value="<%=foundItem._id%>" type="submit">Delete</button>
+          <input type="hidden" name="listName" value="<%= listTitle %>"></input>
+        </form>
+      </li>
+    <% }); %>
+  </ul>
+</div>
+<%- include("partials/footer.ejs") %>
